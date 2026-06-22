@@ -1,10 +1,10 @@
 {
   "name": "AgentBench",
   "short_name": "AgentBench",
-  "description": "A guided bench to build and customize business agents.",
+  "description": "A guided bench to build and run business agents.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f4f7fc",
+  "background_color": "#eef3fb",
   "theme_color": "#2563eb",
   "icons": []
 }

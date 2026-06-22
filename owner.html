@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgentBench — Business Owner</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <canvas id="bgCanvas" class="bg-canvas"></canvas>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">◈</span> Dr. Mehta's</div>
+      <nav class="side-nav">
+        <a class="side-link active" href="owner.html">📊 Dashboard</a>
+        <a class="side-link" href="staff.html">🖥 Front Desk</a>
+        <a class="side-link" href="#reminders">⏰ Reminders</a>
+      </nav>
+      <a class="side-link logout" href="index.html">↩ Sign out</a>
+    </aside>
+    <main class="content">
+      <header class="page-head"><div><h1>Good morning, Dr. Mehta</h1><p class="muted">Your clinic at a glance.</p></div></header>
+      <section class="kpi-row">
+        <div class="kpi card-glass"><span class="kpi-label">Patients today</span><b class="kpi-val" data-count="24">0</b><span class="kpi-trend up">↑ 4</span></div>
+        <div class="kpi card-glass"><span class="kpi-label">Avg wait</span><b class="kpi-val" data-count="12" data-suffix="m">0</b><span class="kpi-trend up">↓ 3m</span></div>
+        <div class="kpi card-glass"><span class="kpi-label">Rating</span><b class="kpi-val">4.9</b><span class="kpi-trend">152 reviews</span></div>
+      </section>
+      <section id="reminders" class="card-glass block">
+        <div class="block-head"><h2>Personal reminders</h2><button class="btn btn-mini" id="addRem">+ Add</button></div>
+        <div id="remList">
+          <div class="reminder"><span class="dot blue"></span>Call lab re: Mira's report · 2:00pm</div>
+          <div class="reminder"><span class="dot amber"></span>Sign off on monthly stock order</div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="js/bg.js"></script>
+  <script src="js/owner.js"></script>
+</body>
+</html>

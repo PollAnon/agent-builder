@@ -4,110 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#2563eb" />
-  <title>AgentBench — Build business agents</title>
+  <title>AgentBench — Sign in</title>
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="manifest" href="manifest.json" />
 </head>
-<body>
-  <div class="bg-orbs" aria-hidden="true">
-    <span class="orb orb-1"></span><span class="orb orb-2"></span><span class="orb orb-3"></span>
-  </div>
+<body class="auth-body">
+  <canvas id="bgCanvas" class="bg-canvas"></canvas>
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="brand big"><span class="brand-mark">◈</span> AgentBench</div>
+      <p class="auth-sub">Build &amp; run agents for any business.</p>
 
-  <header class="topbar">
-    <div class="brand"><span class="brand-mark">◈</span> AgentBench</div>
-    <div class="top-actions">
-      <span class="chip" id="bizName">Clinic Blueprint</span>
-      <button class="btn btn-ghost" id="shareBtn">Share link / QR</button>
-      <button class="btn btn-primary" id="saveBtn">Save Agent</button>
+      <div class="role-select">
+        <button class="role-opt active" data-as="admin">Main Admin</button>
+        <button class="role-opt" data-as="owner">Business Owner</button>
+        <button class="role-opt" data-as="staff">Staff</button>
+      </div>
+
+      <label class="field"><span>Email</span><input type="email" id="email" placeholder="you@business.com" value="admin@agentbench.app" /></label>
+      <label class="field"><span>Password</span><input type="password" id="password" placeholder="••••••••" value="demo" /></label>
+
+      <button class="btn btn-primary full lively" id="loginBtn">Sign in</button>
+      <p class="hint muted">Demo: any password works. Role buttons route you to the right dashboard.</p>
     </div>
-  </header>
-
-  <main class="bench">
-    <!-- ===== LEFT: GUIDED PANEL ===== -->
-    <aside class="panel">
-      <h2 class="panel-title">Build the agent</h2>
-      <p class="panel-sub">Toggle what this business needs. Preview updates live.</p>
-
-      <section class="group">
-        <h3>Business basics</h3>
-        <label class="field"><span>Business name</span>
-          <input type="text" id="inpName" value="Dr. Mehta's Clinic" /></label>
-        <label class="field"><span>Tagline</span>
-          <input type="text" id="inpTag" value="Trusted family care since 2009" /></label>
-      </section>
-
-      <section class="group">
-        <h3>Roles &amp; views</h3>
-        <label class="toggle"><input type="checkbox" data-role="doctor" checked><span class="slider"></span>Doctor / Admin</label>
-        <label class="toggle"><input type="checkbox" data-role="reception" checked><span class="slider"></span>Receptionist</label>
-        <label class="toggle"><input type="checkbox" data-role="customer" checked><span class="slider"></span>Customer page</label>
-        <label class="toggle"><input type="checkbox" data-role="single"><span class="slider"></span>Single-owner mode</label>
-      </section>
-
-      <section class="group">
-        <h3>Customer page sections</h3>
-        <label class="toggle"><input type="checkbox" data-sec="about" checked><span class="slider"></span>About &amp; achievements</label>
-        <label class="toggle"><input type="checkbox" data-sec="book" checked><span class="slider"></span>Book appointment</label>
-        <label class="toggle"><input type="checkbox" data-sec="reviews" checked><span class="slider"></span>Reviews</label>
-      </section>
-
-      <section class="group">
-        <h3>Stages (drag-free, add/remove)</h3>
-        <div class="stages" id="stages">
-          <span class="stage-pill">Booked <button class="x">×</button></span>
-          <span class="stage-pill">Waiting <button class="x">×</button></span>
-          <span class="stage-pill">In Consultation <button class="x">×</button></span>
-          <span class="stage-pill">Done <button class="x">×</button></span>
-        </div>
-        <div class="add-row"><input type="text" id="newStage" placeholder="Add a stage" /><button class="btn btn-mini" id="addStage">Add</button></div>
-      </section>
-    </aside>
-
-    <!-- ===== RIGHT: LIVE PREVIEW ===== -->
-    <section class="preview">
-      <div class="preview-tabs" id="previewTabs">
-        <button class="ptab active" data-view="customer">Customer</button>
-        <button class="ptab" data-view="reception">Receptionist</button>
-        <button class="ptab" data-view="doctor">Doctor / Admin</button>
-      </div>
-
-      <div class="device">
-        <!-- Customer view -->
-        <div class="view active" id="view-customer">
-          <div class="doc-hero">
-            <div class="avatar">M</div>
-            <div><h3 id="pvName">Dr. Mehta's Clinic</h3><p class="muted" id="pvTag">Trusted family care since 2009</p></div>
-          </div>
-          <div class="badges"><span class="badge">15+ yrs</span><span class="badge">4.9 ★</span><span class="badge">MBBS, MD</span></div>
-          <button class="btn btn-primary full lively">Book Appointment</button>
-          <div class="review-card"><strong>Aarav</strong> · ★★★★★<p class="muted">“Caring and on time.”</p></div>
-        </div>
-
-        <!-- Receptionist view -->
-        <div class="view" id="view-reception">
-          <h3>Today · Front Desk</h3>
-          <p class="muted">Everything on one screen — no hunting.</p>
-          <div class="queue">
-            <div class="q-row"><span class="dot blue"></span>10:00 Aarav<span class="q-act">Check in</span></div>
-            <div class="q-row"><span class="dot amber"></span>10:20 Mira<span class="q-act">Waiting</span></div>
-            <div class="q-row"><span class="dot green"></span>10:40 Sam<span class="q-act">In room</span></div>
-          </div>
-        </div>
-
-        <!-- Doctor view -->
-        <div class="view" id="view-doctor">
-          <h3>Dashboard</h3>
-          <div class="stat-row">
-            <div class="stat"><b>24</b><span>Seen today</span></div>
-            <div class="stat"><b>4.9</b><span>Rating</span></div>
-            <div class="stat"><b>3</b><span>Reminders</span></div>
-          </div>
-          <div class="reminder"><span class="dot blue"></span>Call lab re: Mira's report · 2:00pm</div>
-          <div class="reminder"><span class="dot amber"></span>Review new patient notes</div>
-        </div>
-      </div>
-    </section>
-  </main>
-  <script src="js/app.js"></script>
+  </div>
+  <script src="js/bg.js"></script>
+  <script src="js/auth.js"></script>
 </body>
 </html>

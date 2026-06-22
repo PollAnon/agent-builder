@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgentBench — Front Desk</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <canvas id="bgCanvas" class="bg-canvas"></canvas>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">◈</span> Front Desk</div>
+      <nav class="side-nav"><a class="side-link active" href="staff.html">🖥 Queue</a></nav>
+      <a class="side-link logout" href="index.html">↩ Sign out</a>
+    </aside>
+    <main class="content">
+      <header class="page-head"><div><h1>Front Desk</h1><p class="muted">Tap a patient to move them along. No hunting.</p></div></header>
+      <section class="card-glass block">
+        <div class="queue big" id="queue">
+          <div class="q-row" data-stage="0"><span class="dot blue"></span><b>10:00 Aarav</b><span class="q-stage">Booked</span><button class="btn btn-mini next">Next →</button></div>
+          <div class="q-row" data-stage="1"><span class="dot amber"></span><b>10:20 Mira</b><span class="q-stage">Waiting</span><button class="btn btn-mini next">Next →</button></div>
+          <div class="q-row" data-stage="2"><span class="dot green"></span><b>10:40 Sam</b><span class="q-stage">In Consultation</span><button class="btn btn-mini next">Next →</button></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="js/bg.js"></script>
+  <script src="js/staff.js"></script>
+</body>
+</html>

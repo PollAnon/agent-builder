@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgentBench — Admin</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <canvas id="bgCanvas" class="bg-canvas"></canvas>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">◈</span> AgentBench</div>
+      <nav class="side-nav">
+        <a class="side-link active" href="admin.html">📊 Overview</a>
+        <a class="side-link" href="builder.html">🧱 Build Agent</a>
+        <a class="side-link" href="#businesses">🏢 Businesses</a>
+        <a class="side-link" href="#revenue">💰 Revenue</a>
+      </nav>
+      <a class="side-link logout" href="index.html">↩ Sign out</a>
+    </aside>
+    <main class="content">
+      <header class="page-head">
+        <div><h1>Welcome back, Admin</h1><p class="muted">Here's how your network is doing.</p></div>
+        <a href="builder.html" class="btn btn-primary lively">+ Build Agent</a>
+      </header>
+      <section class="kpi-row">
+        <div class="kpi card-glass"><span class="kpi-label">Businesses</span><b class="kpi-val" data-count="6">0</b><span class="kpi-trend up">↑ 2 this month</span></div>
+        <div class="kpi card-glass"><span class="kpi-label">Monthly recurring</span><b class="kpi-val" data-count="1740" data-prefix="$">$0</b><span class="kpi-trend up">↑ 12%</span></div>
+        <div class="kpi card-glass"><span class="kpi-label">Est. revenue generated</span><b class="kpi-val" data-count="48200" data-prefix="$">$0</b><span class="kpi-trend up">↑ 8%</span></div>
+        <div class="kpi card-glass"><span class="kpi-label">Active staff seats</span><b class="kpi-val" data-count="19">0</b><span class="kpi-trend">across all</span></div>
+      </section>
+      <section id="businesses" class="card-glass block">
+        <div class="block-head"><h2>Your businesses</h2><span class="muted">Monthly plan · status</span></div>
+        <div class="biz-row head"><span>Business</span><span>Type</span><span>Plan / mo</span><span>Status</span></div>
+        <div class="biz-row"><span><b>Dr. Mehta's Clinic</b></span><span>Clinic</span><span>$390</span><span class="tag green">Active</span></div>
+        <div class="biz-row"><span><b>Tony's Bakery</b></span><span>Bakery</span><span>$190</span><span class="tag green">Active</span></div>
+        <div class="biz-row"><span><b>SteelLine Co.</b></span><span>Manufacturing</span><span>$540</span><span class="tag green">Active</span></div>
+        <div class="biz-row"><span><b>Bloom Florist</b></span><span>Retail</span><span>$190</span><span class="tag amber">Trial</span></div>
+        <div class="biz-row"><span><b>CityCare Pharmacy</b></span><span>Pharmacy</span><span>$230</span><span class="tag green">Active</span></div>
+        <div class="biz-row"><span><b>Glow Salon</b></span><span>Booking</span><span>$0</span><span class="tag grey">Paused</span></div>
+      </section>
+      <section id="revenue" class="card-glass block">
+        <div class="block-head"><h2>Revenue by month</h2><span class="muted">last 6 months</span></div>
+        <div class="bars">
+          <div class="bar" style="--h:42%"><span>Jan</span></div>
+          <div class="bar" style="--h:55%"><span>Feb</span></div>
+          <div class="bar" style="--h:48%"><span>Mar</span></div>
+          <div class="bar" style="--h:70%"><span>Apr</span></div>
+          <div class="bar" style="--h:82%"><span>May</span></div>
+          <div class="bar" style="--h:95%"><span>Jun</span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="js/bg.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
