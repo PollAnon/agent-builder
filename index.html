@@ -1,96 +1,113 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="metallic">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#1f2933" />
-  <title>OrderBench — Business Agents</title>
+  <meta name="theme-color" content="#2563eb" />
+  <title>AgentBench — Build business agents</title>
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="manifest" href="manifest.json" />
 </head>
 <body>
-  <!-- ===== Top Navigation ===== -->
+  <div class="bg-orbs" aria-hidden="true">
+    <span class="orb orb-1"></span><span class="orb orb-2"></span><span class="orb orb-3"></span>
+  </div>
+
   <header class="topbar">
-    <div class="brand">
-      <span class="brand-mark">◆</span>
-      <span class="brand-name">OrderBench</span>
-    </div>
-    <nav class="nav">
-      <button class="nav-link active" data-screen="admin">Admin</button>
-      <button class="nav-link" data-screen="staff">Dashboard</button>
-      <button class="nav-link" data-screen="customer">Order Page</button>
-    </nav>
-    <div class="theme-switch">
-      <span class="theme-label">Vibe</span>
-      <button class="swatch" data-theme="warm" title="Warm"></button>
-      <button class="swatch" data-theme="professional" title="Professional"></button>
-      <button class="swatch active" data-theme="metallic" title="Metallic Professional"></button>
+    <div class="brand"><span class="brand-mark">◈</span> AgentBench</div>
+    <div class="top-actions">
+      <span class="chip" id="bizName">Clinic Blueprint</span>
+      <button class="btn btn-ghost" id="shareBtn">Share link / QR</button>
+      <button class="btn btn-primary" id="saveBtn">Save Agent</button>
     </div>
   </header>
 
-  <main class="stage">
-    <!-- ===== ADMIN SCREEN ===== -->
-    <section class="screen active" id="screen-admin">
-      <div class="hero">
-        <h1 class="hero-title">Build an agent for any business.</h1>
-        <p class="hero-sub">Create order &amp; tracking agents in minutes. One bench, every business.</p>
-        <button class="btn btn-primary pulse">+ Create New Business Agent</button>
-      </div>
-      <div class="grid">
-        <article class="card lift">
-          <div class="card-icon">🏥</div>
-          <h3>City Care Clinic</h3>
-          <p class="muted">Clinic + Pharmacy</p>
-          <span class="pill">Live</span>
-        </article>
-        <article class="card lift">
-          <div class="card-icon">🥐</div>
-          <h3>Tony's Bakery</h3>
-          <p class="muted">Bakery · Orders</p>
-          <span class="pill">Live</span>
-        </article>
-        <article class="card lift card-dashed">
-          <div class="card-icon">+</div>
-          <h3>Add Business</h3>
-          <p class="muted">Pick a blueprint</p>
-        </article>
-      </div>
-    </section>
+  <main class="bench">
+    <!-- ===== LEFT: GUIDED PANEL ===== -->
+    <aside class="panel">
+      <h2 class="panel-title">Build the agent</h2>
+      <p class="panel-sub">Toggle what this business needs. Preview updates live.</p>
 
-    <!-- ===== STAFF DASHBOARD ===== -->
-    <section class="screen" id="screen-staff">
-      <h2 class="screen-title">Orders Dashboard</h2>
-      <div class="board">
-        <div class="column">
-          <h4 class="col-head new">New</h4>
-          <div class="ticket lift"><strong>#1042</strong><span>2x Sourdough</span><small>Aarav</small></div>
-          <div class="ticket lift"><strong>#1043</strong><span>1x Croissant</span><small>Mira</small></div>
-        </div>
-        <div class="column">
-          <h4 class="col-head making">Being Made</h4>
-          <div class="ticket lift"><strong>#1041</strong><span>Choc Cake</span><small>Sam</small></div>
-        </div>
-        <div class="column">
-          <h4 class="col-head ready">Ready</h4>
-          <div class="ticket lift"><strong>#1039</strong><span>Baguette x3</span><small>Riya</small></div>
-        </div>
-      </div>
-    </section>
+      <section class="group">
+        <h3>Business basics</h3>
+        <label class="field"><span>Business name</span>
+          <input type="text" id="inpName" value="Dr. Mehta's Clinic" /></label>
+        <label class="field"><span>Tagline</span>
+          <input type="text" id="inpTag" value="Trusted family care since 2009" /></label>
+      </section>
 
-    <!-- ===== CUSTOMER PAGE ===== -->
-    <section class="screen" id="screen-customer">
-      <h2 class="screen-title">Tony's Bakery</h2>
-      <p class="muted center">Fresh every morning · Order below</p>
-      <div class="menu">
-        <div class="menu-item lift"><div><strong>Sourdough</strong><small class="muted">Crusty classic</small></div><span class="price">$6</span><button class="btn btn-mini">Add</button></div>
-        <div class="menu-item lift"><div><strong>Croissant</strong><small class="muted">Buttery, flaky</small></div><span class="price">$3</span><button class="btn btn-mini">Add</button></div>
-        <div class="menu-item lift"><div><strong>Chocolate Cake</strong><small class="muted">Rich &amp; moist</small></div><span class="price">$20</span><button class="btn btn-mini">Add</button></div>
+      <section class="group">
+        <h3>Roles &amp; views</h3>
+        <label class="toggle"><input type="checkbox" data-role="doctor" checked><span class="slider"></span>Doctor / Admin</label>
+        <label class="toggle"><input type="checkbox" data-role="reception" checked><span class="slider"></span>Receptionist</label>
+        <label class="toggle"><input type="checkbox" data-role="customer" checked><span class="slider"></span>Customer page</label>
+        <label class="toggle"><input type="checkbox" data-role="single"><span class="slider"></span>Single-owner mode</label>
+      </section>
+
+      <section class="group">
+        <h3>Customer page sections</h3>
+        <label class="toggle"><input type="checkbox" data-sec="about" checked><span class="slider"></span>About &amp; achievements</label>
+        <label class="toggle"><input type="checkbox" data-sec="book" checked><span class="slider"></span>Book appointment</label>
+        <label class="toggle"><input type="checkbox" data-sec="reviews" checked><span class="slider"></span>Reviews</label>
+      </section>
+
+      <section class="group">
+        <h3>Stages (drag-free, add/remove)</h3>
+        <div class="stages" id="stages">
+          <span class="stage-pill">Booked <button class="x">×</button></span>
+          <span class="stage-pill">Waiting <button class="x">×</button></span>
+          <span class="stage-pill">In Consultation <button class="x">×</button></span>
+          <span class="stage-pill">Done <button class="x">×</button></span>
+        </div>
+        <div class="add-row"><input type="text" id="newStage" placeholder="Add a stage" /><button class="btn btn-mini" id="addStage">Add</button></div>
+      </section>
+    </aside>
+
+    <!-- ===== RIGHT: LIVE PREVIEW ===== -->
+    <section class="preview">
+      <div class="preview-tabs" id="previewTabs">
+        <button class="ptab active" data-view="customer">Customer</button>
+        <button class="ptab" data-view="reception">Receptionist</button>
+        <button class="ptab" data-view="doctor">Doctor / Admin</button>
       </div>
-      <button class="btn btn-primary full">Place Order</button>
+
+      <div class="device">
+        <!-- Customer view -->
+        <div class="view active" id="view-customer">
+          <div class="doc-hero">
+            <div class="avatar">M</div>
+            <div><h3 id="pvName">Dr. Mehta's Clinic</h3><p class="muted" id="pvTag">Trusted family care since 2009</p></div>
+          </div>
+          <div class="badges"><span class="badge">15+ yrs</span><span class="badge">4.9 ★</span><span class="badge">MBBS, MD</span></div>
+          <button class="btn btn-primary full lively">Book Appointment</button>
+          <div class="review-card"><strong>Aarav</strong> · ★★★★★<p class="muted">“Caring and on time.”</p></div>
+        </div>
+
+        <!-- Receptionist view -->
+        <div class="view" id="view-reception">
+          <h3>Today · Front Desk</h3>
+          <p class="muted">Everything on one screen — no hunting.</p>
+          <div class="queue">
+            <div class="q-row"><span class="dot blue"></span>10:00 Aarav<span class="q-act">Check in</span></div>
+            <div class="q-row"><span class="dot amber"></span>10:20 Mira<span class="q-act">Waiting</span></div>
+            <div class="q-row"><span class="dot green"></span>10:40 Sam<span class="q-act">In room</span></div>
+          </div>
+        </div>
+
+        <!-- Doctor view -->
+        <div class="view" id="view-doctor">
+          <h3>Dashboard</h3>
+          <div class="stat-row">
+            <div class="stat"><b>24</b><span>Seen today</span></div>
+            <div class="stat"><b>4.9</b><span>Rating</span></div>
+            <div class="stat"><b>3</b><span>Reminders</span></div>
+          </div>
+          <div class="reminder"><span class="dot blue"></span>Call lab re: Mira's report · 2:00pm</div>
+          <div class="reminder"><span class="dot amber"></span>Review new patient notes</div>
+        </div>
+      </div>
     </section>
   </main>
-
-  <footer class="foot"><span class="muted">OrderBench · v1 preview · powered by Supabase</span></footer>
   <script src="js/app.js"></script>
 </body>
 </html>

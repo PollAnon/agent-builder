@@ -1,39 +1,92 @@
-// OrderBench v1 preview — screen switching + theme vibe.
-// Stage 2 will replace the static demo data with live Supabase data.
+// AgentBench v1 — guided builder with live preview.
+// The panel on the left edits a blueprint; the preview on the right reflects it.
+// Stage 2 will persist this blueprint config to Supabase.
 
 (function () {
   'use strict';
 
-  // ---- Screen navigation ----
-  const navLinks = document.querySelectorAll('.nav-link');
-  const screens = document.querySelectorAll('.screen');
-
-  function showScreen(name) {
-    screens.forEach((s) => s.classList.toggle('active', s.id === 'screen-' + name));
-    navLinks.forEach((l) => l.classList.toggle('active', l.dataset.screen === name));
-  }
-
-  navLinks.forEach((link) => {
-    link.addEventListener('click', () => showScreen(link.dataset.screen));
+  // ---- Preview tab switching ----
+  const tabs = document.querySelectorAll('.ptab');
+  const views = document.querySelectorAll('.view');
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const v = tab.dataset.view;
+      tabs.forEach((t) => t.classList.toggle('active', t === tab));
+      views.forEach((view) => view.classList.toggle('active', view.id === 'view-' + v));
+    });
   });
 
-  // ---- Theme / color vibe ----
-  const swatches = document.querySelectorAll('.swatch');
-  const STORAGE_KEY = 'orderbench-theme';
+  // ---- Live business name + tagline ----
+  const inpName = document.getElementById('inpName');
+  const inpTag = document.getElementById('inpTag');
+  const pvName = document.getElementById('pvName');
+  const pvTag = document.getElementById('pvTag');
+  const bizChip = document.getElementById('bizName');
+  const avatar = document.querySelector('.avatar');
 
-  function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    swatches.forEach((s) => s.classList.toggle('active', s.dataset.theme === theme));
-    try { localStorage.setItem(STORAGE_KEY, theme); } catch (e) {}
+  function syncName() {
+    const name = inpName.value.trim() || 'Untitled Business';
+    pvName.textContent = name;
+    bizChip.textContent = name;
+    if (avatar) avatar.textContent = name.charAt(0).toUpperCase();
   }
+  function syncTag() { pvTag.textContent = inpTag.value.trim(); }
+  inpName.addEventListener('input', syncName);
+  inpTag.addEventListener('input', syncTag);
 
-  swatches.forEach((sw) => {
-    sw.addEventListener('click', () => applyTheme(sw.dataset.theme));
+  // ---- Role toggles show/hide preview tabs ----
+  const roleMap = { doctor: 'doctor', reception: 'reception', customer: 'customer' };
+  document.querySelectorAll('input[data-role]').forEach((cb) => {
+    cb.addEventListener('change', () => {
+      const role = cb.dataset.role;
+      if (role === 'single') return; // single-owner handled separately
+      const tab = document.querySelector('.ptab[data-view="' + roleMap[role] + '"]');
+      if (tab) tab.style.display = cb.checked ? '' : 'none';
+    });
   });
 
-  // Restore saved vibe on load.
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) applyTheme(saved);
-  } catch (e) {}
+  // ---- Customer page section toggles ----
+  const secEls = {
+    about: document.querySelector('.doc-hero'),
+    book: document.querySelector('#view-customer .btn-primary'),
+    reviews: document.querySelector('.review-card'),
+  };
+  document.querySelectorAll('input[data-sec]').forEach((cb) => {
+    cb.addEventListener('change', () => {
+      const el = secEls[cb.dataset.sec];
+      if (el) el.style.display = cb.checked ? '' : 'none';
+    });
+  });
+
+  // ---- Stages: add / remove ----
+  const stages = document.getElementById('stages');
+  const newStage = document.getElementById('newStage');
+  const addStage = document.getElementById('addStage');
+
+  function wireRemove(pill) {
+    pill.querySelector('.x').addEventListener('click', () => pill.remove());
+  }
+  stages.querySelectorAll('.stage-pill').forEach(wireRemove);
+
+  function addStageItem() {
+    const val = newStage.value.trim();
+    if (!val) return;
+    const pill = document.createElement('span');
+    pill.className = 'stage-pill';
+    pill.innerHTML = val + ' <button class="x">\u00d7</button>';
+    stages.appendChild(pill);
+    wireRemove(pill);
+    newStage.value = '';
+    newStage.focus();
+  }
+  addStage.addEventListener('click', addStageItem);
+  newStage.addEventListener('keydown', (e) => { if (e.key === 'Enter') addStageItem(); });
+
+  // ---- Share + Save (placeholders until Stage 2 / Supabase) ----
+  document.getElementById('shareBtn').addEventListener('click', () => {
+    alert('Stage 2: this generates a shareable link + QR for the customer page.');
+  });
+  document.getElementById('saveBtn').addEventListener('click', () => {
+    alert('Stage 2: this saves the blueprint as a live agent in Supabase.');
+  });
 })();
